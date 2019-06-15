@@ -11,10 +11,7 @@
     },
     {
       "src": "server.js",
-      "use": "@now/node",
-      "config": {
-        "maxLambdaSize": "20mb"
-      }
+      "use": "@now/node"
     }
   ],
   "routes": [
