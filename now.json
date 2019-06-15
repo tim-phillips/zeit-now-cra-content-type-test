@@ -1,0 +1,48 @@
+{
+  "name": "cra-content-type-test",
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "server.js",
+      "use": "@now/node",
+      "config": {
+        "maxLambdaSize": "20mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=31536000,immutable"
+      },
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/asset-manifest.json",
+      "dest": "/asset-manifest.json"
+    },
+    {
+      "src": "/precache-manifest.(.*)",
+      "dest": "/precache-manifest.$1"
+    },
+    {
+      "src": "/service-worker.js",
+      "headers": {
+        "cache-control": "s-maxage=0"
+      },
+      "dest": "/service-worker.js"
+    },
+    {
+      "src": "(.*)",
+      "dest": "/server.js"
+    }
+  ]
+}
